@@ -35,5 +35,11 @@ namespace WebApiDocker.Controllers
             })
             .ToArray();
         }
+        [HttpGet]
+        [Route("Docker1")]
+        public string Docker()
+        {
+            return "Docker1 is online!";
+        }
     }
 }

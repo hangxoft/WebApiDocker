@@ -10,14 +10,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["WebApiDocker/WebApiDocker.csproj", "WebApiDocker/"]
-RUN dotnet restore "WebApiDocker/WebApiDocker.csproj"
 COPY . .
-WORKDIR "/src/WebApiDocker"
-RUN dotnet build "WebApiDocker.csproj" -c Release -o /app/build
+RUN dotnet restore
+RUN dotnet build -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "WebApiDocker.csproj" -c Release -o /app/publish
+RUN dotnet publish -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
